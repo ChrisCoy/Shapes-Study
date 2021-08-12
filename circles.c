@@ -15,11 +15,12 @@ void clear (){
 }
 
 void printCircleOnScreen(){
-    for (int y = 0; y < tam; y++){
+    for (int y = 0; y < tam; y+=3){
         for (int x = 0; x < tam; x++){
              printf("%c",screen [x][y]);
         }
         printf("\n");
+
     }
 }
 
@@ -44,6 +45,27 @@ void circlePoints(int gap, int radius){
     }
 }
 
+void circlePythagorasShades(int raio){
+    if (raio <= tam){
+        for (int y = -tam; y < tam; y++){
+            for (int x = -tam; x < tam; x++){
+
+                if ((x*x)+(y*y) < (raio*raio)/5){
+                    screen [x+((tam-1)/2)][y+((tam-1)/2)] = '-';
+                }
+                else if ((x*x)+(y*y) < (raio*raio)/3){
+                    screen [x+((tam-1)/2)][y+((tam-1)/2)] = '$';
+                }
+                else if ((x*x)+(y*y) < (raio*raio)/2){
+                    screen [x+((tam-1)/2)][y+((tam-1)/2)] = '@';
+                }
+                else if ((x*x)+(y*y) < (raio*raio)){
+                    screen [x+((tam-1)/2)][y+((tam-1)/2)] = '#';
+                }
+            }
+        }
+    }
+}
 
 int main(){
     int radius;
@@ -59,6 +81,11 @@ int main(){
 
     clear();
     circlePoints(3, radius);
+    printCircleOnScreen();
+
+    printf("\n\n\n");
+    clear();
+    circlePythagorasShades(radius);
     printCircleOnScreen();
 
     //scanf(" %[^\n]s",&cmd);
